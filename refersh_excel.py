@@ -102,6 +102,45 @@ def refresh():
         
 
         time.sleep(10)
-        
-refresh()
+
+def create_file(file_name):
+    with open(file_name, "w") as txt:
+        print("Created", file_name)
+
+def validation():
+    script_dir = get_script_path()
+    data_folder = "data"
+    script_files = os.listdir()
+    if data_folder not in script_files:
+            os.mkdir("data")
+    else:
+        data_dir = os.path.join(script_dir, data_folder)
+        data_files = os.listdir(data_dir)
+        if len(data_files) < 2:
+            try: 
+                create_file(os.path.join(data_dir, "routes.txt"))
+                create_file(os.path.join(data_dir, "source_names.txt"))
+            except:
+                print("Files couldn't be created")
+        else:
+            size = []
+            for file in data_files:
+                file_size = os.stat(os.path.join(data_dir, file)).st_size
+                if file_size <= 0:
+                    print(file, "is empty")
+                    size.append(file_size)
+            if 0 in size:
+                return True
+            else:
+                return False
+            
+def main():
+    val = True
+    while val:
+        val = validation()
+        print(val)
+        time.sleep(2)
+    
+
+main()
             
