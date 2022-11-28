@@ -89,16 +89,14 @@ def refresh():
     while True:
         files = os.listdir(data_dir)
         #print(files)
-        if route_file not in files:
-            print("No path associated, please insert route to consolidated file as show below")
-            print("C:\\Users\\e0123456\\Consolidated.xlsx\n")
-            path = input()
-            write_txt(routes_text_path, path)
-        else:
-            print("Path associated")
-            consolidated_path = read_txt(routes_text_path)
+        print("Path associated")
+        consolidated_path = read_txt(routes_text_path)
+        print(consolidated_path)
+        try:
             compare_dates(consolidated_path[0], data_dir)
             print(files, "\n")
+        except:
+            print("Cannot do chit")
         
 
         time.sleep(10)
@@ -141,6 +139,7 @@ def main():
         print(val)
         time.sleep(2)
     
+    refresh()
 
 main()
             
