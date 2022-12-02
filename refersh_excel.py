@@ -96,10 +96,10 @@ def refresh():
             compare_dates(consolidated_path[0], data_dir)
             print(files, "\n")
         except:
-            print("Cannot do chit")
+            print("Files don't have corresponding data to use. Please check 'routes.txt' and 'source_names.txt' in 'data' folder")
         
 
-        time.sleep(10)
+        time.sleep(43200)
 
 def create_file(file_name):
     with open(file_name, "w") as txt:
@@ -110,7 +110,7 @@ def validation():
     data_folder = "data"
     script_files = os.listdir()
     if data_folder not in script_files:
-            os.mkdir("data")
+        os.mkdir("data")
     else:
         data_dir = os.path.join(script_dir, data_folder)
         data_files = os.listdir(data_dir)
@@ -131,15 +131,15 @@ def validation():
                 return True
             else:
                 return False
+    return True
             
 def main():
     val = True
     while val:
         val = validation()
         print(val)
-        time.sleep(2)
+        time.sleep(10)
     
     refresh()
 
 main()
-            
